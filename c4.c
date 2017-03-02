@@ -2,24 +2,28 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
+//#include "handle_arguments.h"
 //#include "file_utils.h"
-#define WIDTH 7
-#define HEIGHT 6
+#define ROWS 7
+#define COLUMNS 6
 
 //custom functions//
-void Board(int width, int height);
+void Board(char *board);
 void placePiece(int position, int turn_num);
 void turn(int turn_num);
+void save_board();
+void load_board();
 
 
 
 int main(int argc, char **argv) {
-    // if(arc ==
     
     //take in user input here//
     //start with the piece type, X or O//
     char player_one_piece, player_two_piece;
     int win_condit;
+    char board[ROWS * COLUMNS];
+    memset(board, '*', ROWS * COLUMNS);
     
     
     printf("--------------------------------------------------------------------\n");
@@ -73,9 +77,10 @@ int main(int argc, char **argv) {
     printf("--------------------------------------------------------------------\n");
     
     
-    Board(WIDTH, HEIGHT);
+    
     int turn_num = 0;
     
+    Board(board);
     turn(turn_num);
     
     
@@ -87,29 +92,19 @@ int main(int argc, char **argv) {
 
 /**
  * Initilizes the board
- * @param width width of the board
- * @param height height of the board
+ * @param board created board
  */
-void Board(int width, int height){
-    
-    char grid[WIDTH][HEIGHT];
-    for(int i = 0; i < height; i++){
-        for(int j = 0; j < width; j++){
-            grid[i][j] = '*';
-            printf("%c ", grid[i][j]);
+void Board(char *board){
+    int row, col;
+    for(row = 0; row < ROWS; row++){
+        for(col = 0; col < COLUMNS; col++){
+            printf(" %c ",  board[COLUMNS * row + col]);
         }
         printf("\n");
     }
-    
 }
 
-void placePiece(int position, int turn){
-    printf("here\n");
-    turn++;
-    
-    
-    
-}
+
 /**
  *Keep track and print out the current players turn.
  *@param turn_num turn for the current player
@@ -129,5 +124,25 @@ void turn(int turn_num){
         scanf("%d", &position_two);
         placePiece(position_two, turn_num);
     }
+}
+
+/**
+ * Save the board state to a file
+ *
+ */
+void save_board(){
+    //todo
+    
+    
+}
+
+
+/**
+ * Load the board that was saved to file
+ *
+ */
+void load_board(){
+    //todo
+    
 }
 
